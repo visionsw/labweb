@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>方法内容</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/method.css">
+</head>
+<body>
+    <span><img src="/static/images/logo.jpg" class="logo"></span>
+    <table class="table"><tr><td valign="top"></td></tr></table>
+    <span id="mspan1">
+        <h2>方法目录</h2>
+        <nav>
+            {% for area in areas %}
+                <a href="#{{ area.name }}" class="target">{{ area.name }}</a>
+                <ul id="{{ area.name }}"  class="target">
+                    {% for method in area.methods %}
+                    <li>
+                        <a href="/methods/{{ method.mcname }}" style="text-decoration:none;">{{ method.mcname }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <br>
+            {% endfor %}
+        </nav>
+    </span>
+    <h1 id="time">代码演示</h1>
+    <span id="s">
+        <form class="search" method="post" action="{% url 'search' %}">
+            {% csrf_token %}
+            <input type="text" placeholder="请输入检索内容" name="keyword">
+            <input type="submit" value="检索">
+        </form>
+    </span>
+     <div id="content">
+        <h2>简介</h2>
+         <p></p>
+        <h2>动机</h2>
+         <p></p>
+        <h2>定义</h2>
+         <p></p>
+        <h2>发展历史</h2>
+         <p></p>
+         <h2>相关资料</h2>
+    </div>
+</body>
+</html>

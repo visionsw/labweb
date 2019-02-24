@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>检索结果</title>
+    <link rel="stylesheet" href="/static/css/searchresults.css">
+</head>
+<body>
+    <span id="logo">
+        <img src="/static/images/logo.jpg" class="logo">
+    </span>
+    <span id="search">
+        <form class="search" method="post" action="{% url 'search' %}">
+            {% csrf_token %}
+            <input type="text" placeholder="请输入检索内容" name="keyword">
+            <input type="submit" value="检索">
+        </form>
+    </span>
+    <a id="back" href="/">返回首页</a>
+    <span id="condition">
+
+    </span>
+    <div id="content">
+    <br>
+    <span id="results">
+        {% for method in methods %}
+            <a href="/methods/{{ method.mcname }}">{{ method.mcname }}（{{ method.mename }})</a>
+            <p id="des">{{ method.mdescription }}</p>
+        {% endfor %}
+    </span>
+    <table class="table1"><tr><td valign="top"></td></tr></table>
+    <span id="rec">
+        <span id="recbymethod">
+            <h3>根据方法推荐</h3>
+            <h1>内容未定</h1>
+        </span>
+        <span id="recbyarea">
+            <h3>根据领域推荐</h3>
+            {% for method in area_methods %}
+            <a href="/methods/{{ method.mcname }}">{{ method.mcname }}（{{ method.mename }})</a>
+            <br>
+        {% endfor %}
+        </span>
+    </span>
+    </div>
+</body>
+</html>

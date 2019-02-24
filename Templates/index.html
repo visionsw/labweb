@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+    <title>首页</title>
+    <script type="text/javascript" src="/static/js/index.js"></script>
+</head>
+<body>
+    <span><img src="/static/images/logo.jpg" class="logo"></span>
+    <h1 id="time">时间演化</h1>
+    <table class="table"><tr><td valign="top"></td></tr></table>
+    <span id="span1">
+        <h2>方法目录</h2>
+        <nav>
+            {% for area in areas %}
+                <a href="#{{ area.name }}" class="target">{{ area.name }}</a>
+                <ul id="{{ area.name }}"  class="target">
+                    {% for method in area.methods %}
+                    <li>
+                        <a href="/methods/{{ method.mcname }}" style="text-decoration:none;">{{ method.mcname }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <br>
+            {% endfor %}
+        </nav>
+    </span>
+    <!--<div class="hot">-->
+        <!--<h2>热门方法</h2>-->
+        <!--<ul>-->
+            <!--{% for hot in hots %}-->
+            <!--<li>-->
+                <!--<a href="#">{{ hot }}</a>-->
+            <!--</li>-->
+            <!--{% endfor %}-->
+        <!--</ul>-->
+    <!--</div>-->
+    <span id="timeselect">
+        {% for area in areas %}
+           <!--{% if getSelected == area.acname %}-->
+                <label style="background:white">{{ area.name }}</label>
+                <table border="1">
+                    <tr>
+                        <th>方法名</th>
+                        <th>提出时间</th>
+                        <th>提出者</th>
+                        <th>方法热度</th>
+                    </tr>
+                {% for method in area.methods %}
+                    <tr>
+                        <td>{{method.mcname}}</td>
+                        <td>{{method.myear}}</td>
+                        <td>{{method.mpersons}}</td>
+                        <td>{{method.mhot}}</td>
+                    </tr>
+                {% endfor %}
+                </table>
+                <br>
+            <!--{% endif %}-->
+        {% endfor %}
+    </span>
+
+    <table class="table1"><tr><td valign="top"></td></tr></table>
+    <span id="s">
+        <form class="search" method="post" action="{% url 'search' %}">
+            {% csrf_token %}
+            <input type="text" placeholder="请输入检索内容" name="keyword">
+            <input type="submit" value="检索">
+        </form>
+    </span>
+
+</body>
+</html>
